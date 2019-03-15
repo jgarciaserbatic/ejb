@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Ejemplo de uso de cookies</title>
+	<script type="text/javascript">
+		function getCookie(name) {
+			var value = "; " + document.cookie;
+			var parts = value.split("; " + name + "=");
+			if (parts.length == 2) return parts.pop().split(";").shift();
+		}
+		function fillCookieValue() {
+			var cookieValue = getCookie("my-custom-cookie");
+			if(cookieValue !== undefined) {
+				document.getElementById("cookie-value").innerText = cookieValue;
+			}
+		}
+	</script>
+</head>
+<body onload="javascript:fillCookieValue()">
+	<div class="row">
+		<span>Cookie value : </span><span id="cookie-value">No value</span>
+	</div>
+</body>
+</html>

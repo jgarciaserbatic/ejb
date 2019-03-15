@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ejemplo de uso de parámetros</title>
+</head>
+<body>
+	<form action="/servlet-session/SessionServlet" method="post">
+		<div class="row">
+			<label for="param">Atributo 1</label>
+			<input type="text" id="param" name="param" />
+		</div>
+		<div class="row">
+			<input type="hidden" id="nextStep" name="nextStep" value="step-2" />
+		</div>
+		<div class="row">
+			<input type="submit" value="Enviar" />
+		</div>
+	</form>
+</body>
+</html>
