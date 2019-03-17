@@ -44,4 +44,5 @@
   	<servlet-name>DeletePersonController</servlet-name>
   	<url-pattern>/deletePerson</url-pattern>
   </servlet-mapping>
+  
 </web-app>

@@ -1,0 +1,6 @@
+com\ceoe\java\dao\impl\DefaultPersonDao.class
+com\ceoe\java\service\PersonService.class
+com\ceoe\java\dao\ConnectionManager.class
+com\ceoe\java\service\impl\DefaultPersonService.class
+com\ceoe\java\model\Person.class
+com\ceoe\java\dao\PersonDao.class

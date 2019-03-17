@@ -36,14 +36,11 @@ public class AddPersonController extends AbstractPersonController {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Integer id = new Integer(request.getParameter("id"));
+			String identityDoc = request.getParameter("identityDoc");
 			String firstName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
 			Integer age = new Integer(request.getParameter("age"));
-			Person p = new Person();
-			p.setId(id);
-			p.setFirstName(firstName);
-			p.setLastName(lastName);
-			p.setAge(age);
+			Person p = new Person(id, identityDoc, firstName, lastName, age);
 			this.getPersonService().addPerson(p);
 			// Volvemos al listado de personas
 			response.sendRedirect(request.getContextPath()+"/listPersons");

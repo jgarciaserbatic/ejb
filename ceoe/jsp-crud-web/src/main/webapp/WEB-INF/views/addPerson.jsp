@@ -7,9 +7,11 @@
 </head>
 <body>
 	<div id="content">
+		<form method="post" action="${param.action}">
 		<jsp:include page="../components/personForm.jsp">
 			<jsp:param value="${pageContext.request.contextPath}/addPerson" name="action" />
 		</jsp:include>
+		</form>
 	</div>
 </body>
 </html>

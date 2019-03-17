@@ -1,0 +1,5 @@
+com\ceoe\java\servlet\person\AbstractPersonController.class
+com\ceoe\java\servlet\person\DeletePersonController.class
+com\ceoe\java\servlet\person\PersonsListController.class
+com\ceoe\java\servlet\person\AddPersonController.class
+com\ceoe\java\servlet\person\EditPersonController.class
