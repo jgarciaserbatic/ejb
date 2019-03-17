@@ -28,12 +28,6 @@
   	<description></description>
   	<servlet-class>com.ceoe.java.servlet.person.DeletePersonController</servlet-class>
   </servlet>
-  <servlet>
-  	<servlet-name>EncuentaPersonNamesController</servlet-name>
-  	<display-name>EncuentaPersonNamesController</display-name>
-  	<description></description>
-  	<servlet-class>com.ceoe.java.servlet.person.EncuentaPersonNamesController</servlet-class>
-  </servlet>
   <servlet-mapping>
   	<servlet-name>PersonsListController</servlet-name>
   	<url-pattern>/listPersons</url-pattern>
@@ -49,10 +43,6 @@
   <servlet-mapping>
   	<servlet-name>DeletePersonController</servlet-name>
   	<url-pattern>/deletePerson</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>EncuentraPersonNamesController</servlet-name>
-  	<url-pattern>/findPerson</url-pattern>
   </servlet-mapping>
   
 </web-app>
