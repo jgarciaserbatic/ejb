@@ -13,5 +13,9 @@ public interface PersonService {
 	public void updatePerson(Person p);
 	
 	public void deletePerson(Person p);
+	
+	public Person encuentraPersona(Integer id);
+	
+	public List<Person> getAllPersonsbyFistname(String name);
 
 }

@@ -31,7 +31,10 @@
 							<input type="hidden" id="id" name="id" value="<%=person.getId()%>" />
 							<input type="Submit" value="Editar" />
 						</form>
-						
+						<form method="GET" action="${pageContext.request.contextPath}/deletePerson">
+							<input type="hidden" id="id" name="id" value="<%=person.getId()%>" />
+							<input type="Submit" value="eliminar" />
+						</form>
 					</td>
 				</tr>
 			<% } %>

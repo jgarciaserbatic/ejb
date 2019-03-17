@@ -1,6 +1,5 @@
 package com.ceoe.java.dao.impl;
 
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -117,14 +116,84 @@ public class DefaultPersonDao implements PersonDao {
 		}
 	}
 
+	//Metodo en el service que actualiza un usuario.
 	public void updatePerson(Person person) throws SQLException {
-		// TODO Auto-generated method stub
+		PreparedStatement pstm = null;
+		try {
+			String sqlUpdate = "UPDATE Person SET firstName='" + person.getFirstName() + "', lastName='" + person.getLastName()
+			+ "', age='" + person.getAge() + "'  WHERE id='" + person.getId() + "'";
+			pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sqlUpdate);
+			pstm.executeUpdate(sqlUpdate);
+			
+		}finally {
+			if(pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
 		
 	}
 
+	//Metodo en el service que elimina un usuario.
 	public void deletePerson(Person person) throws SQLException {
-		// TODO Auto-generated method stub
+		PreparedStatement pstm = null;
+		try {
+			String sqlDelete = "DELETE FROM Person WHERE firstName='" + person.getFirstName() + "', lastName='" + person.getLastName()
+			+ "', age='" + person.getAge() + "'  WHERE id='" + person.getId() + "'";
+			pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sqlDelete);
+			pstm.executeUpdate(sqlDelete);
+			
+		}finally {
+			if(pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
 		
+	}
+
+	public List<Person> findPersonName(String name) throws SQLException {
+		List<Person> persons = new ArrayList<Person>();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT id,firstName,lastName,age FROM Person where name= '"+ name+"';";
+			pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
+			pstm.execute();
+			rs = pstm.getResultSet();
+			if(rs != null) {				
+				while(rs.next()) {
+					Person person = new Person();
+					person.setId(rs.getInt("id"));
+					person.setFirstName(rs.getString("firstName"));
+					person.setLastName(rs.getString("lastName"));
+					person.setAge(rs.getInt("age"));
+					persons.add(person);
+				}
+			}
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
+		return persons;
 	}	
 
 }

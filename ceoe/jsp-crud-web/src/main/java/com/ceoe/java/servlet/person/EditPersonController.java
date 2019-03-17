@@ -1,12 +1,14 @@
 package com.ceoe.java.servlet.person;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ceoe.java.service.impl.DefaultPersonService;
+import com.ceoe.java.model.Person;
 
 /**
  * Servlet implementation class EditPersonController
@@ -14,6 +16,11 @@ import com.ceoe.java.service.impl.DefaultPersonService;
 public class EditPersonController extends AbstractPersonController {
        
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * @see HttpServlet#HttpServlet()
      */
     public EditPersonController() {
@@ -25,7 +32,17 @@ public class EditPersonController extends AbstractPersonController {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		try {
+			Integer id = new Integer(request.getParameter("id"));
+			Person persona =  this.getPersonService().encuentraPersona(id);
+			this.getPersonService().updatePerson(persona);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/listPersons.jsp");
+			rd.forward(request, response);
+		} catch(Exception e) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/error/error.jsp");
+			rd.forward(request, response);
+		}
+		
 	}
 
 	/**
