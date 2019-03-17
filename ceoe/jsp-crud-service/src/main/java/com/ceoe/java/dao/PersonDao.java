@@ -16,5 +16,7 @@ public interface PersonDao {
 	public void updatePerson(Person person) throws SQLException;
 	
 	public void deletePerson(Person person) throws SQLException;
+	
+	public List<Person> findPersonName(String name) throws SQLException;
 
 }

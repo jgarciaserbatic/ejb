@@ -10,6 +10,11 @@
 		<form action="<%=request.getContextPath()%>/addPerson" method="GET">
 			<input type="submit" value="Añadir persona" />
 		</form>
+		<br>
+		<form action="<%=request.getContextPath()%>/findPerson" method="GET">
+			<input type="text" id="firstName" name="firstName" />
+			<input type="submit" value="Encontrar persona por nombre" />
+		</form>
 		<jsp:include page="../components/persons.jsp" />
 	</div>
 </body>

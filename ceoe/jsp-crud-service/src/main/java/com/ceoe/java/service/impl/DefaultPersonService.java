@@ -24,6 +24,15 @@ public class DefaultPersonService implements PersonService {
 			return null;
 		}
 	}
+	
+	public Person encuentraPersona(Integer id) {
+		try {
+			return this.personDao.findPerson(id);
+		} catch(SQLException e) {
+			System.out.println("Error buscando a la persona");
+			return null;
+		}
+	}
 
 	public Person addPerson(Person p) {
 		try {
@@ -80,6 +89,15 @@ public class DefaultPersonService implements PersonService {
 			}
 		}
 		return true;
+	}
+
+	public List<Person> getAllPersonsbyFistname(String name) {
+		try {
+			return this.personDao.findPersonName(name);
+		} catch(SQLException e) {
+			System.out.println("Error buscando a la persona");
+			return null;
+		}
 	}
 
 }
