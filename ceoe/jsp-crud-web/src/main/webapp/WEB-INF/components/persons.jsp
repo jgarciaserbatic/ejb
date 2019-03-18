@@ -7,7 +7,7 @@
 <div id="persons-list">
 	<%
 	List<Person> persons = (List<Person>) request.getAttribute("persons");
-	if(persons.size() > 0) { 
+	if(persons != null && persons.size() > 0) { 
 	%>
 		<table>
 			<thead>
@@ -32,6 +32,12 @@
 							<input type="Submit" value="Editar" />
 						</form>
 						
+					</td>
+					<td>
+					<form method="GET" action="${pageContext.request.contextPath}/deletePerson">
+					<input type="hidden" id="id" name="id" value="<%=person.getId()%>" />
+					<input type="submit" value="Eliminar" />
+					</form>
 					</td>
 				</tr>
 			<% } %>

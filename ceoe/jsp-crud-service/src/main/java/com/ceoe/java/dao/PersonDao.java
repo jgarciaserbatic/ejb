@@ -13,8 +13,8 @@ public interface PersonDao {
 	
 	public Person addPerson(Person person) throws SQLException;
 	
-	public void updatePerson(Person person) throws SQLException;
+	public Person updatePerson(Person person) throws SQLException;
 	
-	public void deletePerson(Person person) throws SQLException;
+	public Person deletePerson(Person person) throws SQLException;
 
 }

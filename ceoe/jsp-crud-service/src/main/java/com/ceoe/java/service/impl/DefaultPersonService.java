@@ -25,6 +25,15 @@ public class DefaultPersonService implements PersonService {
 		}
 	}
 
+	public Person getPerson(Integer id) {
+		try {
+			return this.personDao.findPerson(id);
+		} catch(SQLException e) {
+			System.out.println("Error buscando la persona con id : "+id);
+			return null;
+		}
+	}
+
 	public Person addPerson(Person p) {
 		try {
 			if(this.isValid(p)) {

@@ -8,6 +8,8 @@ public interface PersonService {
 	
 	public List<Person> getAllPersons();
 	
+	public Person getPerson(Integer id);
+	
 	public Person addPerson(Person p);
 	
 	public void updatePerson(Person p);

@@ -92,6 +92,7 @@ public class DefaultPersonDao implements PersonDao {
 
 	public Person addPerson(Person person) throws SQLException {
 		PreparedStatement pstm = null;
+		
 		try {
 			Person p = this.findPerson(person.getId());
 			if(p == null) {
@@ -117,13 +118,58 @@ public class DefaultPersonDao implements PersonDao {
 		}
 	}
 
-	public void updatePerson(Person person) throws SQLException {
-		// TODO Auto-generated method stub
+	public Person updatePerson(Person person) throws SQLException {
+		PreparedStatement pstm = null;
+		try {
+			Person p = this.findPerson(person.getId());
+			if(p == null) {
+				String sql = "UPDATE Person SET id = ?, firstName = ?, lastName = ?, age = ? WHERE id = ?";
+				pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
+				pstm.setInt(1, person.getId());
+				pstm.setString(2, person.getFirstName());
+				pstm.setString(3, person.getLastName());
+				pstm.setInt(4, person.getAge());
+				pstm.executeUpdate();
+				return this.findPerson(person.getId());
+			} else {
+				return null;
+			}
+		} finally {
+			if(pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
 		
 	}
 
-	public void deletePerson(Person person) throws SQLException {
-		// TODO Auto-generated method stub
+	public Person deletePerson(Person person) throws SQLException {
+		PreparedStatement pstm = null;
+		try {
+			Person p = this.findPerson(person.getId());
+			if(p == null) {
+				String sql = "DELETE FROM Person WHERE id = ?";
+				pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
+				
+				pstm.setInt(1, person.getId());
+				
+				pstm.execute();
+				return this.findPerson(person.getId());
+			} else {
+				return null;
+			}
+		} finally {
+			if(pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
 		
 	}	
 
