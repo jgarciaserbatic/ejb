@@ -9,32 +9,28 @@
 	List<Person> persons = (List<Person>) request.getAttribute("persons");
 	if(persons.size() > 0) { 
 	%>
-		<table>
+		<table border=1>
 			<thead>
 				<tr>
-					<td>Id.</td>
+					<td>ID</td>					
 					<td>Nombre</td>
 					<td>Apellidos</td>
 					<td>Edad</td>
-					<td>Acciones</td>
+					<td colspan="2">Acciones</td>
 				</tr>
 			</thead>
 			<tbody>
-			<% for(Person person: persons) {%>
-				<tr>
-					<td><%= person.getId() %></td>
-					<td><%= person.getFirstName() %></td>
-					<td><%= person.getLastName() %></td>
-					<td><%= person.getAge() %></td>
-					<td>
-						<form method="GET" action="${pageContext.request.contextPath}/editPerson">
-							<input type="hidden" id="id" name="id" value="<%=person.getId()%>" />
-							<input type="Submit" value="Editar" />
-						</form>
-						
-					</td>
+			<c:forEach var="person" items="${persons}">			
+				<tr>	
+					<td>${ person.getId() }</td>				
+					<td>${ person.getFirstName() }</td>
+					<td>${ person.getLastName() }</td>
+					<td>${ person.getAge() }</td>
+					<td><a href="${pageContext.request.contextPath}/editPerson?id=${person.getId()}" >Editar</a> </td>
+					<td><a href="${pageContext.request.contextPath}/deletePerson?id=${person.getId()}" >Eliminar</a> </td>
 				</tr>
-			<% } %>
+			</c:forEach>	
+			
 			</tbody>
 		</table>
 	<%} else { %>

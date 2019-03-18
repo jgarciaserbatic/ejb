@@ -116,15 +116,62 @@ public class DefaultPersonDao implements PersonDao {
 			}			
 		}
 	}
-
+	//metodo para actualizar persona
 	public void updatePerson(Person person) throws SQLException {
-		// TODO Auto-generated method stub
+		
+		PreparedStatement pstm = null;
+		try {
+			Person p = this.findPerson(person.getId()); //buscamos a la persona
+			if(! (p == null) ) {
+				//Creamos la consulta de Insert
+				String sql = "UPDATE Person SET "
+						+ "firstName=? , "
+						+ "lastName=?,"
+						+ "age=? "
+						+ "WHERE id = ?";
+				//Seteamos los campos
+				pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
+				pstm.setString(1, person.getFirstName());
+				pstm.setString(2, person.getLastName());
+				pstm.setInt(3, person.getAge());
+				pstm.setInt(4, person.getId());
+				//Ejecutamos la consulta
+				pstm.executeUpdate();
+
+			}
+		} finally {
+			if(pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
 		
 	}
-
+	//Metodo para Eliminar persona
 	public void deletePerson(Person person) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement pstm = null;
+		try {
+			Person p = this.findPerson(person.getId()); //busco a la persona
+			if(! (p == null) ) {
+				String sql = "DELETE FROM Person "
+						+ "WHERE id = ?"; //Creo la consulta para borrar
+				pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
+				pstm.setInt(1, person.getId()); //Seteo el id de la persona a borrar
+				pstm.executeUpdate();//Ejecuto la consulta
+
+			}
+		} finally {
+			if(pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
 	}	
 
 }
