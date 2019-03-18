@@ -27,11 +27,16 @@
 					<td><%= person.getLastName() %></td>
 					<td><%= person.getAge() %></td>
 					<td>
-						<form method="GET" action="${pageContext.request.contextPath}/editPerson">
+						<form method="POST" action="${pageContext.request.contextPath}/deletePerson">
 							<input type="hidden" id="id" name="id" value="<%=person.getId()%>" />
+							<input type="Submit" value="Eliminar" />
+						</form>	
+					</td>
+					<td>
+						<form method="GET" action="${pageContext.request.contextPath}/editPerson">
+							<input type="hidden" id="id" name="id" value="<%=person.getId() %>" />
 							<input type="Submit" value="Editar" />
-						</form>
-						
+						</form>	
 					</td>
 				</tr>
 			<% } %>

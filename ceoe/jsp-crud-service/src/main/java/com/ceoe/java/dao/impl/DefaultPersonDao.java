@@ -118,13 +118,55 @@ public class DefaultPersonDao implements PersonDao {
 	}
 
 	public void updatePerson(Person person) throws SQLException {
-		// TODO Auto-generated method stub
+		PreparedStatement pstm = null;
+		try {
+			Person p = this.findPerson(person.getId());
+			if(p != null) {
+				String sql = "UPDATE Person SET firstName = ?, lastName = ?, age = ? WHERE id = ?";
+				pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
+				pstm.setString(1, person.getFirstName());
+				pstm.setString(2, person.getLastName());
+				pstm.setInt(3, person.getAge());
+				pstm.setInt(4, person.getId());
+				pstm.executeUpdate();
+				System.out.println("La persona id = " + person.getId() + " ha sido actualizada");				
+			} else {
+				System.out.println("La persona id = " + person.getId() + " no existe");
+			}
+		} finally {
+			if(pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
 		
 	}
 
 	public void deletePerson(Person person) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement pstm = null;
+		try {
+			Person p = this.findPerson(person.getId());
+			if(p != null) {
+				String sql = "DELETE Person WHERE id = ?";
+				pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
+				pstm.setInt(1, person.getId());
+				pstm.executeUpdate();
+				System.out.println("La persona con id = " + person.getId() + " ha sido eliminada");				
+			} else {
+				System.out.println("La persona id = " + person.getId() + " no existe");
+			}
+		} finally {
+			if(pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
 	}	
 
 }

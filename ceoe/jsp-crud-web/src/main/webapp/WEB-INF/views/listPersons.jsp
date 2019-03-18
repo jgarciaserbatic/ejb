@@ -7,10 +7,8 @@
 </head>
 <body>
 	<div id="content">
-		<form action="<%=request.getContextPath()%>/addPerson" method="GET">
-			<input type="submit" value="Añadir persona" />
-		</form>
 		<jsp:include page="../components/persons.jsp" />
+		<a href="<%=request.getContextPath()%>/addPerson"><button>Añadir Persona</button></a>
 	</div>
 </body>
 </html>
