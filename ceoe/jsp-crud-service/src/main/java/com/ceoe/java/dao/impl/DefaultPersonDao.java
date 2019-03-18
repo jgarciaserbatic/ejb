@@ -118,12 +118,66 @@ public class DefaultPersonDao implements PersonDao {
 	}
 
 	public void updatePerson(Person person) throws SQLException {
-		// TODO Auto-generated method stub
+		Person person1 = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			String sql = "UPDATE Person SET firstName="+person.getFirstName()+",lastName="+person.getLastName()+",age="+String.valueOf(person.getAge())+" FROM Person WHERE id = ?";
+			pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
+			pstm.setInt(person.getId(), id);
+			pstm.setMaxRows(1);
+			pstm.execute();
+			rs = pstm.getResultSet();
+			
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
+		return person;
 		
 	}
 
 	public void deletePerson(Person person) throws SQLException {
-		// TODO Auto-generated method stub
+		Person person1 = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			String sql = "DELETE FROM Person WHERE id = ?";
+			pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
+			pstm.setInt(person.getId(), id);
+			pstm.setMaxRows(1);
+			pstm.execute();
+			rs = pstm.getResultSet();
+			
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
+		return person;
 		
 	}	
 
