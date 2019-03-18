@@ -7,19 +7,19 @@
 	<form method="post" action="${param.action}">
 		<div class="row">
 			<label for="id">Id.:</label>
-			<input type="number" id="id" name="id" min="1" />
+			<input type="number" id="id" name="id" min="1" value ="${param.id}" />
 		</div>
 		<div class="row">
 			<label for="firstName">First name:</label>
-			<input type="text" id="firstName" name="firstName" />
+			<input type="text" id="firstName" name="firstName" value ="${persona.firstName}" />
 		</div>
 		<div class="row">
 			<label for="lastName">Last name:</label>
-			<input type="text" id="lastName" name="lastName" />
+			<input type="text" id="lastName" name="lastName" value ="${persona.lastName}" />
 		</div>
 		<div class="row">
 			<label for="age">Age :</label>
-			<input type="number" id="age" name="age" min="1" />
+			<input type="number" id="age" name="age" min="1" value ="${persona.age}" />
 		</div>
 		<div class="row">
 			<input type="submit" value="Enviar" />

@@ -24,7 +24,15 @@ public class DefaultPersonService implements PersonService {
 			return null;
 		}
 	}
-
+	public Person findPerson(Integer id) {
+		try {
+			return this.personDao.findPerson(id);
+		}catch (Exception e) {
+			System.out.println("Error buscando el listado de personas");
+			return null;
+		}
+		 
+	}
 	public Person addPerson(Person p) {
 		try {
 			if(this.isValid(p)) {
@@ -48,10 +56,10 @@ public class DefaultPersonService implements PersonService {
 		}		
 	}
 
-	public void deletePerson(Person p) {
+	public void deletePerson(Integer id) {
 		try {
 			// TODO: Validar el objeto Person p
-			this.personDao.deletePerson(p);
+			this.personDao.deletePerson(id);
 		} catch(SQLException e) {
 			System.out.println("Error creando la persona");
 		}		

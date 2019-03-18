@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"  %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"  %>
 <%@ page isELIgnored="false" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.ceoe.java.model.*" %>
@@ -27,11 +27,14 @@
 					<td><%= person.getLastName() %></td>
 					<td><%= person.getAge() %></td>
 					<td>
-						<form method="GET" action="${pageContext.request.contextPath}/editPerson">
+						<form method="get" action="${pageContext.request.contextPath}/editPerson">
 							<input type="hidden" id="id" name="id" value="<%=person.getId()%>" />
 							<input type="Submit" value="Editar" />
 						</form>
-						
+						<form method="post" action="${pageContext.request.contextPath}/deletePerson">
+							<input type="hidden" id="id" name="id" value="<%=person.getId()%>" />
+							<input type="Submit" value="Borrar" />
+						</form>
 					</td>
 				</tr>
 			<% } %>

@@ -118,12 +118,48 @@ public class DefaultPersonDao implements PersonDao {
 	}
 
 	public void updatePerson(Person person) throws SQLException {
-		// TODO Auto-generated method stub
+		PreparedStatement pstm = null;
+		try {
+
+			String sql = "UPDATE Person SET id = ?, firstName =? , lastName =?, age=? WHERE id=?";
+			pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
+			pstm.setInt(1, person.getId());
+			pstm.setString(2, person.getFirstName());
+			pstm.setString(3, person.getLastName());
+			pstm.setInt(4, person.getAge());
+			pstm.setInt(5, person.getId());
+			pstm.executeUpdate();
+
+		} finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		
 	}
 
-	public void deletePerson(Person person) throws SQLException {
-		// TODO Auto-generated method stub
+	public void deletePerson(Integer id) throws SQLException {
+		PreparedStatement pstm = null;
+		try {
+			String sql = "DELETE FROM person WHERE id= ?";
+			pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
+			pstm.setInt(1,id);
+			pstm.executeUpdate();
+
+		} finally {
+			if (pstm != null) {
+				try {
+					pstm.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		
 	}	
 

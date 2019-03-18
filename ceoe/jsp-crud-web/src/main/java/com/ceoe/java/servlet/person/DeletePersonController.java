@@ -1,6 +1,8 @@
 package com.ceoe.java.servlet.person;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +26,14 @@ public class DeletePersonController extends AbstractPersonController {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		try {
+			Integer id = new Integer(request.getParameter("id"));
+			this.getPersonService().deletePerson(id);
+			response.sendRedirect(request.getContextPath()+"/listPersons");
+		}catch (Exception e) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/error/error.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 }
