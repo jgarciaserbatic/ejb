@@ -123,12 +123,12 @@ public class DefaultPersonDao implements PersonDao {
 		try {
 			Person p = this.findPerson(person.getId());
 			if(p == null) {
-				String sql = "UPDATE Person SET id = ?, firstName = ?, lastName = ?, age = ? WHERE id = ?";
-				pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
-				pstm.setInt(1, person.getId());
-				pstm.setString(2, person.getFirstName());
-				pstm.setString(3, person.getLastName());
-				pstm.setInt(4, person.getAge());
+				String sql = "UPDATE Person SET firstName = ?, lastName = ?, age = ? WHERE id = ?";
+				pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);				
+				pstm.setString(1, person.getFirstName());
+				pstm.setString(2, person.getLastName());
+				pstm.setInt(3, person.getAge());
+				pstm.setInt(4, person.getId());
 				pstm.executeUpdate();
 				return this.findPerson(person.getId());
 			} else {
@@ -152,11 +152,9 @@ public class DefaultPersonDao implements PersonDao {
 			Person p = this.findPerson(person.getId());
 			if(p == null) {
 				String sql = "DELETE FROM Person WHERE id = ?";
-				pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);
-				
-				pstm.setInt(1, person.getId());
-				
-				pstm.execute();
+				pstm = ConnectionManager.getInstance().getConnection().prepareStatement(sql);				
+				pstm.setInt(1, person.getId());				
+				pstm.executeUpdate();
 				return this.findPerson(person.getId());
 			} else {
 				return null;
